@@ -1,0 +1,17 @@
+{
+    "Leo": {
+        "genre": "Action",
+        "rating": 9.5,
+        "year": 2023
+    },
+    "Master": {
+        "genre": "Action",
+        "rating": 9.0,
+        "year": 2022
+    },
+    "96": {
+        "genre": "Romance",
+        "rating": 8.5,
+        "year": 2018
+    }
+}

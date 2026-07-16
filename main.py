@@ -1,8 +1,15 @@
+import json
 
-movies = {
-    "Leo": {"genre": "Action", "rating": 8.5, "year": 2023},
-    "96": {"genre": "Romance", "rating": 9.2, "year": 2018}
-}
+def load_movies():
+    with open("movies.json", "r", encoding="utf-8") as file:
+        movies = json.load(file)
+        return movies
+
+def save_movies():
+    with open("movies.json", "w") as file:
+        json.dump(movies, file, indent=4)
+
+movies = load_movies()
 
 def add_movie():
     title = input("Enter movie title: ")
@@ -15,6 +22,7 @@ def add_movie():
         "rating": rating,
         "year": year
     }
+    save_movies()
     print("Movie added successfully!")
 
 def view_movies():
@@ -24,11 +32,11 @@ def view_movies():
 
     for title, details in movies.items():
         print(f"""
-Title : {title}
-Genre : {details['genre']}
-Rating: {details['rating']}
-Year  : {details['year']}
-""")
+    Title : {title}
+    Genre : {details['genre']}
+    Rating: {details['rating']}
+    Year  : {details['year']}
+    """)
 
 def search_movie():
     search_title = input("Enter movie title: ")
@@ -36,11 +44,11 @@ def search_movie():
     if search_title in movies:
         details = movies[search_title]
         print(f"""
-Title : {search_title}
-Genre : {details['genre']}
-Rating: {details['rating']}
-Year  : {details['year']}
-""")
+    Title : {search_title}
+    Genre : {details['genre']}
+    Rating: {details['rating']}
+    Year  : {details['year']}
+    """)
     else:
         print("Movie not found!")
 
@@ -49,9 +57,13 @@ def delete_movie():
 
     if search_title in movies:
         del movies[search_title]
+        save_movies()
         print("Movie deleted successfully!")
     else:
         print("Movie not found!")
+    
+
+    
 
 def update_movie():
     mov_title = input("Enter movie title: ")
@@ -61,10 +73,10 @@ def update_movie():
         return
 
     print("""
-1. Update Genre
-2. Update Rating
-3. Update Year
-""")
+    1. Update Genre
+    2. Update Rating
+    3. Update Year
+    """)
 
     choice = input("Enter your choice: ")
 
@@ -77,7 +89,7 @@ def update_movie():
     else:
         print("Invalid choice")
         return
-
+    save_movies()
     print("Movie updated successfully!")
 
 def top_rated_movie():
@@ -95,14 +107,12 @@ def top_rated_movie():
 
     details = movies[top_movie]
 
-    print(f"""
-Top Rated Movie
-
-Title : {top_movie}
-Genre : {details['genre']}
-Rating: {details['rating']}
-Year  : {details['year']}
-""")
+    print(f"""Top Rated Movie
+    Title : {top_movie}
+    Genre : {details['genre']}
+    Rating: {details['rating']}
+    Year  : {details['year']}
+    """)
 
 def recommend_by_genre():
     genre_search = input("Enter genre: ")
