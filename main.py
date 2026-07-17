@@ -1,13 +1,4 @@
-import json
-
-def load_movies():
-    with open("movies.json", "r", encoding="utf-8") as file:
-        movies = json.load(file)
-        return movies
-
-def save_movies():
-    with open("movies.json", "w") as file:
-        json.dump(movies, file, indent=4)
+from file_handler import load_movies,save_movies
 
 movies = load_movies()
 
@@ -22,7 +13,7 @@ def add_movie():
         "rating": rating,
         "year": year
     }
-    save_movies()
+    save_movies(movies)
     print("Movie added successfully!")
 
 def view_movies():
@@ -57,7 +48,7 @@ def delete_movie():
 
     if search_title in movies:
         del movies[search_title]
-        save_movies()
+        save_movies(movies)
         print("Movie deleted successfully!")
     else:
         print("Movie not found!")
@@ -89,7 +80,7 @@ def update_movie():
     else:
         print("Invalid choice")
         return
-    save_movies()
+    save_movies(movies)
     print("Movie updated successfully!")
 
 def top_rated_movie():
